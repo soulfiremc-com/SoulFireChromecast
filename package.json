@@ -12,14 +12,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@radix-ui/react-separator": "^1.1.10",
     "@tailwindcss/vite": "^4.1.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^1.0.0",
     "non.geist": "^2.0.0",
     "react": "^19.0.0",
-    "recharts": "^3.7.0",
     "react-dom": "^19.0.0",
+    "recharts": "^3.7.0",
     "tailwind-merge": "^3.0.0",
     "tailwindcss-animate": "^1.0.7"
   },

@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import type {
   CastInstanceInfo,
@@ -74,9 +75,9 @@ export default function Dashboard({
       {/* Header */}
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">{instanceInfo.friendlyName}</h1>
-        <span className="rounded-full bg-primary/20 px-3 py-1 text-sm font-medium text-primary">
+        <Badge variant="outline" className="border-primary/30 text-primary">
           {instanceInfo.state}
-        </span>
+        </Badge>
       </div>
 
       {/* Summary row */}
