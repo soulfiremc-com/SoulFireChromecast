@@ -25,7 +25,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.15",
+    "@biomejs/biome": "2.5.5",
     "@types/chromecast-caf-receiver": "^6.0.14",
     "@types/node": "^24.0.0",
     "@types/react": "^19.0.0",
