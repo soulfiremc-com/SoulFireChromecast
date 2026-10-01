@@ -1,4 +1,3 @@
-import "non.geist";
 import { Loader2Icon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import Dashboard from "@/components/dashboard";
