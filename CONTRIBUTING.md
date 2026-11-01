@@ -27,13 +27,14 @@ A normal browser preview cannot verify Cast receiver lifecycle or device communi
 
 ## Source layout and protocol
 
-- `src/App.tsx`: receiver lifecycle, message handling, and display state.
-- `src/lib/cast-protocol.ts`: metrics message types.
-- `src/components/dashboard.tsx` and `src/components/charts.tsx`: receiver display.
+- `src/App.tsx`: receiver routes and display views.
+- `src/runtime/`: Effect services for CAF events, sender ownership, and metrics state.
+- `packages/cast-protocol/`: shared Effect Schema contract and package build.
+- `src/components/MetricsCharts.tsx`: receiver charts.
 - `src/components/ui/`: shared UI components.
 
 The receiver uses `urn:x-cast:com.soulfiremc` for custom JSON messages.
-Review changes alongside the sender in SoulFireClient's `electron/native/cast.ts` and its metrics message producers.
+Review changes alongside the sender in SoulFireClient's `electron/cast/` services and metrics acquisition worker.
 Keep metric units, timestamps, and message types consistent across the sender and receiver.
 Document how missing fields, disconnected sessions, and stop messages affect the display.
 
@@ -45,12 +46,14 @@ Try application-level changes before modifying shared UI components.
 
 ```bash
 bun run typecheck
+bun test
 bun run check
 bunx --no-install biome ci
 bun run build
 ```
 
-There is no dedicated automated test suite. Add focused tests for new complex logic where practical.
+The automated suite uses a simulated CAF platform and a controlled Effect clock.
+Add focused tests for new complex logic. The tests do not replace hardware validation.
 For Cast behavior changes, verify on a registered test receiver and a device that you control.
 Use the [Cast registration guide](https://developers.google.com/cast/docs/registration) for receiver and device setup.
 Coordinate receiver URLs and application registration with a maintainer.
