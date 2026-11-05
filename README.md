@@ -1,6 +1,6 @@
-# SoulFire Chromecast
+# Soulfire Chromecast
 
-Show SoulFire instance metrics on a Chromecast or Cast-enabled TV. The receiver is a hosted web app launched by the SoulFire desktop client.
+Show Soulfire instance metrics on a Chromecast or Cast-enabled TV. The receiver is a hosted web app launched by the Soulfire desktop client.
 
 ## Use the display
 
@@ -11,7 +11,7 @@ Show SoulFire instance metrics on a Chromecast or Cast-enabled TV. The receiver 
 
 Changing the instance selection does not change an active broadcast. **Cast selected instance** switches the display explicitly.
 
-After pressing Home on the TV, use **Show on TV** in the desktop client. This action restarts the SoulFire receiver and restores its history and settings. The client reports receiver readiness separately from visibility. Some devices cannot report visibility.
+After pressing Home on the TV, use **Show on TV** in the desktop client. This action restarts the Soulfire receiver and restores its history and settings. The client reports receiver readiness separately from visibility. Some devices cannot report visibility.
 
 **Stop casting** stops the receiver and releases the connection. A disconnected receiver retains its last charts and shows a recovery message. Samples more than 15 seconds old show a data-delay notice.
 

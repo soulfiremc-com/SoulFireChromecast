@@ -74,11 +74,11 @@ function Shell() {
   const notice =
     state.error ??
     (state.phase === "disconnected"
-      ? "The desktop client disconnected. Use Reconnect in SoulFire to resume this display."
+      ? "The desktop client disconnected. Use Reconnect in Soulfire to resume this display."
       : stale
-        ? "Metrics stopped updating. Check the SoulFire server connection in the desktop client."
+        ? "Metrics stopped updating. Check the Soulfire server connection in the desktop client."
         : !latest
-          ? "Choose an instance and connect to this display from SoulFire’s Cast page."
+          ? "Choose an instance and connect to this display from Soulfire’s Cast page."
           : null);
   return (
     <div
@@ -90,7 +90,7 @@ function Shell() {
         <div className="brand">
           <img src="/icon.svg" alt="" width={40} height={40} />
           <div>
-            <p className="product-name">SoulFire</p>
+            <p className="product-name">Soulfire</p>
             <h1>{data?.instanceInfo.name ?? "Cast display"}</h1>
           </div>
         </div>
