@@ -26,7 +26,7 @@
       "devDependencies": {
         "@biomejs/biome": "2.3.15",
         "@types/bun": "^1.4.4",
-        "@types/chromecast-caf-receiver": "^6.0.14",
+        "@types/chromecast-caf-receiver": "^7.0.0",
         "@types/node": "^24.0.0",
         "@types/react": "^19.0.0",
         "@types/react-dom": "^19.0.0",
@@ -206,7 +206,7 @@
 
     "@types/bun": ["@types/bun@1.4.4", "", { "dependencies": { "bun-types": "1.4.4" } }, "sha512-9wkRDXUXK124pEnAutE6n/l18j+i9GC5IAHK8TmX/2nlySETmky0OU6yL5U8pW1AoKh++AN9auDCr647BfurjQ=="],
 
-    "@types/chromecast-caf-receiver": ["@types/chromecast-caf-receiver@6.0.25", "", {}, "sha512-76M/NBSEK+2Lc5FCzeUQYnGtn0wK+aBgDjT4JFKhpAOACeM/eoSnKMuND3SQ/ND1vcGgCc6QauNEfXozQOq7Lg=="],
+    "@types/chromecast-caf-receiver": ["@types/chromecast-caf-receiver@7.0.1", "", {}, "sha512-vR8pWpG/1oSY4ZKjuASRjpOl4ODmSiOXct9eQ6zZZxoiA7l5c829rXWbdS97P08ZOpTxM6icRI5GdGu00buS0A=="],
 
     "@types/d3-force": ["@types/d3-force@3.0.10", "", {}, "sha512-ZYeSaCF3p73RdOKcjj+swRlZfnYpK1EbaDiYICEEp5Q6sUiqFaFQ9qgoshp5CzIyyb/yD09kD9o2zEltCexlgw=="],
 
