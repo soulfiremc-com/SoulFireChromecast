@@ -95,10 +95,7 @@ export const ReceiverPlatformLive = Layer.sync(ReceiverPlatform, () => {
       for (const [type, handler] of handlers)
         context.addEventListener(type, handler);
       return () => {
-        context.removeCustomMessageListener(
-          CAST_NAMESPACE,
-          message as unknown as SystemEventHandler,
-        );
+        context.removeCustomMessageListener(CAST_NAMESPACE, message);
         for (const [type, handler] of handlers)
           context.removeEventListener(type, handler);
       };
