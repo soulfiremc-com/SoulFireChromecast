@@ -81,7 +81,7 @@ export const ReceiverPlatformLive = Layer.sync(ReceiverPlatform, () => {
         listener({
           type: "error",
           message:
-            "The Cast runtime reported an error. Reconnect from SoulFire.",
+            "The Cast runtime reported an error. Reconnect from Soulfire.",
         });
       context.addCustomMessageListener(CAST_NAMESPACE, message);
       const handlers = [

@@ -159,7 +159,7 @@ export function createReceiver(layer: Layer.Layer<ReceiverPlatform>) {
             requestId: message.requestId,
             code: "VERSION_MISMATCH",
             message:
-              "Update SoulFire and the Cast receiver to compatible versions.",
+              "Update Soulfire and the Cast receiver to compatible versions.",
           });
           return;
         }
@@ -173,7 +173,7 @@ export function createReceiver(layer: Layer.Layer<ReceiverPlatform>) {
             requestId: message.requestId,
             code: "BUSY",
             message:
-              "Another SoulFire client controls this display. Stop its cast before connecting.",
+              "Another Soulfire client controls this display. Stop its cast before connecting.",
           });
           return;
         }
@@ -199,7 +199,7 @@ export function createReceiver(layer: Layer.Layer<ReceiverPlatform>) {
           type: "ERROR",
           requestId: message.requestId,
           code: "SESSION_MISMATCH",
-          message: "This Cast session has expired. Reconnect from SoulFire.",
+          message: "This Cast session has expired. Reconnect from Soulfire.",
         });
         return;
       }
@@ -312,7 +312,7 @@ export function createReceiver(layer: Layer.Layer<ReceiverPlatform>) {
                     patch({
                       phase: "failed",
                       error:
-                        "The receiver could not process a message. Reconnect from SoulFire.",
+                        "The receiver could not process a message. Reconnect from Soulfire.",
                     });
                     yield* Effect.logError(
                       "Cast message processing failed",
@@ -331,7 +331,7 @@ export function createReceiver(layer: Layer.Layer<ReceiverPlatform>) {
               patch({
                 phase: "failed",
                 error:
-                  "The Cast runtime is unavailable. Launch this display from SoulFire.",
+                  "The Cast runtime is unavailable. Launch this display from Soulfire.",
               });
               yield* Effect.logError("Cast receiver startup failed", cause);
             }),
