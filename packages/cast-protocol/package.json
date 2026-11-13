@@ -11,7 +11,7 @@
     "dist"
   ],
   "peerDependencies": {
-    "effect": "4.1.1"
+    "effect": "4.1.4"
   },
   "scripts": {
     "build": "rm -rf dist && bun build src/index.ts --format esm --external effect --outfile dist/index.js && bun build src/index.ts --format cjs --external effect --outfile dist/index.cjs && tsc -p tsconfig.build.json"
