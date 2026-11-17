@@ -1,6 +1,7 @@
 // Packages the built site in dist/ as Cloudflare Build Output, so
 // `cf deploy --prebuilt` can upload it as an assets-only Worker.
 import { fileURLToPath } from "node:url";
+
 import {
   cleanBuildOutputDir,
   writeAssets,
@@ -8,6 +9,7 @@ import {
   writeWorkerConfig,
 } from "@cloudflare/build-output-utils";
 import { resolveAndParseConfig } from "@cloudflare/config";
+
 import config from "../cloudflare.config.ts";
 
 const root = fileURLToPath(new URL("..", import.meta.url));

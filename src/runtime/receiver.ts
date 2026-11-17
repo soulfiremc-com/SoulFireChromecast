@@ -14,6 +14,7 @@ import {
 import { QueryClient } from "@tanstack/react-query";
 import { createStore } from "@tanstack/react-store";
 import {
+  Cause,
   Clock,
   Effect,
   Fiber,
@@ -24,6 +25,7 @@ import {
   Schema,
   Stream,
 } from "effect";
+
 import { type ReceiverEvent, ReceiverPlatform } from "./platform";
 
 export interface MetricsData {
@@ -85,7 +87,7 @@ export function createReceiver(layer: Layer.Layer<ReceiverPlatform>) {
   });
   let disposal: Promise<void> | undefined;
   let diagnosticId = 0;
-  let fiber: Fiber.Fiber<void, never> | undefined;
+  let fiber: Fiber.Fiber<void> | undefined;
   const patch = (update: Partial<ReceiverState>) =>
     store.setState((state) => ({ ...state, ...update }));
   const record = (event: string) =>
@@ -131,11 +133,13 @@ export function createReceiver(layer: Layer.Layer<ReceiverPlatform>) {
       }
       const reply = (message: ReceiverMessage) =>
         platform.send(event.senderId, message);
-      const decoded = yield* Effect.try(() =>
-        payloadBytes(event.payload) <= MAX_PAYLOAD_BYTES
-          ? Schema.decodeUnknownOption(SenderMessage)(event.payload)
-          : Option.none(),
-      ).pipe(Effect.orElseSucceed(() => Option.none()));
+      const decoded = yield* Effect.try({
+        try: () =>
+          payloadBytes(event.payload) <= MAX_PAYLOAD_BYTES
+            ? Schema.decodeUnknownOption(SenderMessage)(event.payload)
+            : Option.none(),
+        catch: (cause) => new Cause.UnknownError(cause),
+      }).pipe(Effect.orElseSucceed(() => Option.none()));
       if (Option.isNone(decoded)) {
         reply({
           type: "ERROR",

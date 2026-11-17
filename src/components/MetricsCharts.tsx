@@ -4,6 +4,7 @@ import { Chart } from "@tanstack/charts/react";
 import { scaleBand } from "@tanstack/charts/scales/band";
 import { scaleLinear } from "@tanstack/charts/scales/linear";
 import { useMemo } from "react";
+
 import type { MetricsData } from "@/runtime/receiver";
 
 const time = (value: number) =>

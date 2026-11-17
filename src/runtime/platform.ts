@@ -57,6 +57,7 @@ export const ReceiverPlatformLive = Layer.sync(ReceiverPlatform, () => {
       const disconnected: SystemEventHandler = (event) => {
         listener({
           type: "disconnected",
+          // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- the CAF typings omit senderId on SystemEvent
           senderId: (event as unknown as { senderId: string }).senderId,
         });
       };

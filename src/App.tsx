@@ -20,6 +20,7 @@ import {
   useTable,
 } from "@tanstack/react-table";
 import { useMemo } from "react";
+
 import {
   DimensionChart,
   PositionChart,
@@ -306,6 +307,7 @@ function Diagnostics() {
             <TableRow key={group.id}>
               {group.headers.map((header) => (
                 <TableHead key={header.id}>
+                  {/* oxlint-disable-next-line jsx-a11y/control-has-associated-label -- FlexRender renders the header text */}
                   <button
                     type="button"
                     onClick={header.column.getToggleSortingHandler()}

@@ -1,4 +1,5 @@
 import { afterEach, expect, test } from "bun:test";
+
 import {
   DEFAULT_SETTINGS,
   MAX_PAYLOAD_BYTES,
@@ -11,6 +12,7 @@ import {
 } from "@soulfiremc/cast-protocol";
 import { Clock, Effect, Exit, Layer, Scope } from "effect";
 import { TestClock } from "effect/testing";
+
 import { type ReceiverEvent, ReceiverPlatform } from "../src/runtime/platform";
 import {
   createReceiver,
@@ -42,6 +44,31 @@ function sample(timestamp: number): MetricsSnapshot {
     disconnections: 0,
   };
 }
+function metrics(
+  sequence: number,
+  snapshots = [sample(sequence + 1000)],
+  instanceId = "instance",
+  reset = sequence === 0,
+): SenderMessage {
+  return {
+    type: "METRICS",
+    requestId: crypto.randomUUID(),
+    sessionId: "session",
+    sequence,
+    instanceId,
+    reset,
+    snapshots,
+    distributions: {
+      healthHistogram: [],
+      foodHistogram: [],
+      dimensionCounts: {},
+      gameModeCounts: {},
+      botPositions: [],
+    },
+    instanceInfo: { name: instanceId, onlineBots: 2, desiredBots: 3 },
+  };
+}
+
 async function fixture() {
   const scope = Scope.makeUnsafe();
   const clock = await Effect.runPromise(
@@ -89,28 +116,6 @@ async function fixture() {
       },
       senderId,
     );
-  const metrics = (
-    sequence: number,
-    snapshots = [sample(sequence + 1000)],
-    instanceId = "instance",
-    reset = sequence === 0,
-  ): SenderMessage => ({
-    type: "METRICS",
-    requestId: crypto.randomUUID(),
-    sessionId: "session",
-    sequence,
-    instanceId,
-    reset,
-    snapshots,
-    distributions: {
-      healthHistogram: [],
-      foodHistogram: [],
-      dimensionCounts: {},
-      gameModeCounts: {},
-      botPositions: [],
-    },
-    instanceInfo: { name: instanceId, onlineBots: 2, desiredBots: 3 },
-  });
   return {
     app,
     clock,

@@ -1,9 +1,11 @@
 import { QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import { createRoot } from "react-dom/client";
+
 import App, { createReceiverRouter } from "./App.tsx";
 import { ReceiverPlatformLive } from "./runtime/platform";
 import { createReceiver } from "./runtime/receiver";
+
 import "./index.css";
 
 const receiver = createReceiver(ReceiverPlatformLive);
