@@ -24,3 +24,6 @@ dist-ssr
 
 /artifacts/
 /packages/cast-protocol/dist/
+
+# Cloudflare CLI build output
+.cloudflare/

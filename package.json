@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && bun scripts/write-build-output.ts",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.test.json --noEmit",
     "fix": "biome check --write --unsafe",
     "check": "biome check",
@@ -37,17 +37,20 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.8",
+    "@cloudflare/build-output-utils": "1.0.0-rc.0",
+    "@cloudflare/config": "1.0.0-rc.0",
     "@types/bun": "^1.4.4",
     "@types/chromecast-caf-receiver": "^7.0.0",
     "@types/node": "^26.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react-swc": "^4.0.0",
+    "cf": "1.0.0-rc.0",
+    "lefthook": "2.2.2",
     "postcss": "^8.4.38",
     "tailwindcss": "^4.1.5",
     "typescript": "^7.0.0",
-    "vite": "^8.0.0",
-    "lefthook": "2.2.2"
+    "vite": "^8.0.0"
   },
   "packageManager": "bun@1.4.4",
   "trustedDependencies": [
