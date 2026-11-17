@@ -38,7 +38,7 @@ Review changes alongside the sender in SoulFireClient's `electron/cast/` service
 Keep metric units, timestamps, and message types consistent across the sender and receiver.
 Document how missing fields, disconnected sessions, and stop messages affect the display.
 
-Follow the Biome configuration and the existing TypeScript conventions.
+Follow the Oxlint and oxfmt configuration and the existing TypeScript conventions.
 Use stable React keys, `gap-*` layout utilities, and readable labels.
 Try application-level changes before modifying shared UI components.
 
@@ -48,7 +48,6 @@ Try application-level changes before modifying shared UI components.
 bun run typecheck
 bun test
 bun run check
-bunx --no-install biome ci
 bun run build
 ```
 
@@ -73,7 +72,7 @@ Do not bypass Git hooks. Let all configured checks finish.
 Complete the pull request template with the problem, resulting behavior, and affected files.
 If a related issue exists, link it.
 Use `Closes #123` only if the change fully resolves that issue.
-Record typecheck, Biome, build results, and any browser or Cast device checks.
+Record typecheck, lint, format, build results, and any browser or Cast device checks.
 Explain any checks that you could not perform.
 For visible changes, include screenshots and the environment used to capture them.
 Open a draft for early feedback on substantial changes.

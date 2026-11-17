@@ -3,8 +3,12 @@ min_version: 2.2.2
 
 pre-commit:
   commands:
-    biome:
-      run: bunx --no-install biome check --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
+    oxlint:
+      glob: "*.{js,jsx,ts,tsx,mjs,cjs,mts,cts}"
+      run: bunx --no-install oxlint --deny-warnings --fix {staged_files}
+      stage_fixed: true
+    oxfmt:
+      run: bunx --no-install oxfmt --no-error-on-unmatched-pattern {staged_files}
       stage_fixed: true
 
 pre-push:

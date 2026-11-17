@@ -41,7 +41,7 @@ jobs:
 
       - name: Run check
         run: |
-          bunx --no-install biome ci
+          bun run check
 
       - name: Run regression tests
         run: bun test

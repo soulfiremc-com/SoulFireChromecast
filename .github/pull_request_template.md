@@ -5,7 +5,7 @@
 
 ## Validation
 
-<!-- Record exact commands and results: bun run typecheck, bun run check, bunx --no-install biome ci, bun run build, and Cast device checks if relevant. -->
+<!-- Record exact commands and results: bun run typecheck, bun run check, bun run build, and Cast device checks if relevant. -->
 <!-- Include relevant versions, reproduction observations, or screenshots. Remove credentials and private data. -->
 <!-- Explain any checks that you could not run. -->
 
