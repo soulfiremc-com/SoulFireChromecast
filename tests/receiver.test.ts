@@ -262,7 +262,7 @@ test("history stays sorted and bounded", () => {
     sample(MAX_SNAPSHOTS + 1),
   ]);
   expect(merged).toHaveLength(MAX_SNAPSHOTS);
-  expect(merged[0].timestamp).toBe(50);
+  expect(merged.at(0)?.timestamp).toBe(50);
   expect(merged.at(-1)?.timestamp).toBe(MAX_SNAPSHOTS + 49);
 });
 
