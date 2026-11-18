@@ -1,7 +1,7 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "../tsconfig.json",
   "compilerOptions": {
     "types": ["bun", "chromecast-caf-receiver"]
   },
-  "include": ["src", "tests"]
+  "include": ["../src", "."]
 }
