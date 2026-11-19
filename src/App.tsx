@@ -356,6 +356,11 @@ export function createReceiverRouter(receiver: Receiver) {
     context: { receiver },
   });
 }
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: ReturnType<typeof createReceiverRouter>;
+  }
+}
 export default function App({
   router,
 }: {

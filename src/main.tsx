@@ -22,7 +22,7 @@ import.meta.hot?.dispose(() => {
   void receiver.dispose();
 });
 
-const root = document.getElementById("root");
+const root = document.querySelector("#root");
 if (!root) throw new Error("The receiver root element is missing.");
 createRoot(root).render(
   <React.StrictMode>

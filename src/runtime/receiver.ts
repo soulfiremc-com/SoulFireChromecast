@@ -88,9 +88,10 @@ export function createReceiver(layer: Layer.Layer<ReceiverPlatform>) {
   let disposal: Promise<void> | undefined;
   let diagnosticId = 0;
   let fiber: Fiber.Fiber<void> | undefined;
-  const patch = (update: Partial<ReceiverState>) =>
+  const patch = (update: Partial<ReceiverState>) => {
     store.setState((state) => ({ ...state, ...update }));
-  const record = (event: string) =>
+  };
+  const record = (event: string) => {
     store.setState((state) => ({
       ...state,
       diagnostics: [
@@ -98,6 +99,7 @@ export function createReceiver(layer: Layer.Layer<ReceiverPlatform>) {
         { id: ++diagnosticId, timestamp: state.now, event },
       ].slice(-100),
     }));
+  };
 
   const handle = (event: ReceiverEvent) =>
     Effect.gen(function* () {
@@ -131,8 +133,9 @@ export function createReceiver(layer: Layer.Layer<ReceiverPlatform>) {
         }
         return;
       }
-      const reply = (message: ReceiverMessage) =>
+      const reply = (message: ReceiverMessage) => {
         platform.send(event.senderId, message);
+      };
       const decoded = yield* Effect.try({
         try: () =>
           payloadBytes(event.payload) <= MAX_PAYLOAD_BYTES

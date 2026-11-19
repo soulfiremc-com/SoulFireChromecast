@@ -42,10 +42,15 @@ export const ReceiverPlatformLive = Layer.sync(ReceiverPlatform, () => {
       };
       context.start(options);
     },
-    stop: () => context.stop(),
-    setState: (state) => context.setApplicationState(state),
-    send: (senderId, message) =>
-      context.sendCustomMessage(CAST_NAMESPACE, senderId, message),
+    stop: () => {
+      context.stop();
+    },
+    setState: (state) => {
+      context.setApplicationState(state);
+    },
+    send: (senderId, message) => {
+      context.sendCustomMessage(CAST_NAMESPACE, senderId, message);
+    },
     subscribe: (listener) => {
       const message: CustomMessageHandler = (event) => {
         listener({
@@ -77,13 +82,16 @@ export const ReceiverPlatformLive = Layer.sync(ReceiverPlatform, () => {
         listener({ type: "ready" });
         visibility();
       };
-      const shutdown: SystemEventHandler = () => listener({ type: "shutdown" });
-      const error: SystemEventHandler = () =>
+      const shutdown: SystemEventHandler = () => {
+        listener({ type: "shutdown" });
+      };
+      const error: SystemEventHandler = () => {
         listener({
           type: "error",
           message:
             "The Cast runtime reported an error. Reconnect from SoulFire.",
         });
+      };
       context.addCustomMessageListener(CAST_NAMESPACE, message);
       const handlers = [
         [cast.framework.system.EventType.READY, ready],

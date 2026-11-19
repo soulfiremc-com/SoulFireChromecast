@@ -223,7 +223,7 @@ export function PositionChart({
         })),
     [positions],
   );
-  return dimensions.length ? (
+  return dimensions.length > 0 ? (
     <div className="position-grid">
       {dimensions.map((entry) => (
         <DimensionPositions key={entry.dimension} {...entry} />
