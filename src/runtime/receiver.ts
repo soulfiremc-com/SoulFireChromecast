@@ -251,10 +251,11 @@ export function createReceiver(layer: Layer.Layer<ReceiverPlatform>) {
           reply({ type: "ACK", ...request });
           break;
         }
-        case "SETTINGS":
+        case "SETTINGS": {
           patch({ settings: message.settings });
           reply({ type: "ACK", ...request });
           break;
+        }
         case "PING": {
           const data = queryClient.getQueryData<MetricsData>(
             metricsKey(state.instanceId),
@@ -269,11 +270,12 @@ export function createReceiver(layer: Layer.Layer<ReceiverPlatform>) {
           });
           break;
         }
-        case "RELEASE":
+        case "RELEASE": {
           reply({ type: "ACK", ...request });
           patch({ ownerId: null, sessionId: null, phase: "disconnected" });
           platform.stop();
           break;
+        }
       }
     });
   const tick = Effect.gen(function* () {
