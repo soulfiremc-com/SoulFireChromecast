@@ -17,6 +17,8 @@
 
     /* Linting */
     "strict": true,
+    "verbatimModuleSyntax": true,
+    "erasableSyntaxOnly": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
