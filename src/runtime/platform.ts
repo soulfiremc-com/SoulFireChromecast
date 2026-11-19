@@ -28,7 +28,7 @@ export class ReceiverPlatform extends Context.Service<
     readonly send: (senderId: string, message: ReceiverMessage) => void;
     readonly setState: (state: string) => void;
   }
->()("soulfire/ReceiverPlatform") {}
+>()("soulfire-chromecast/runtime/platform/ReceiverPlatform") {}
 
 export const ReceiverPlatformLive = Layer.sync(ReceiverPlatform, () => {
   const context = cast.framework.CastReceiverContext.getInstance();

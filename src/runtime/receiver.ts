@@ -171,7 +171,8 @@ export function createReceiver(layer: Layer.Layer<ReceiverPlatform>) {
           return;
         }
         if (
-          state.ownerId &&
+          state.ownerId !== null &&
+          state.ownerId !== "" &&
           (state.ownerId !== event.senderId ||
             state.sessionId !== message.sessionId)
         ) {
@@ -237,7 +238,11 @@ export function createReceiver(layer: Layer.Layer<ReceiverPlatform>) {
                 instanceInfo: message.instanceInfo,
               },
             );
-            if (state.instanceId && state.instanceId !== message.instanceId)
+            if (
+              state.instanceId !== null &&
+              state.instanceId !== "" &&
+              state.instanceId !== message.instanceId
+            )
               queryClient.removeQueries({
                 queryKey: metricsKey(state.instanceId),
               });
@@ -282,7 +287,11 @@ export function createReceiver(layer: Layer.Layer<ReceiverPlatform>) {
     const now = yield* Clock.currentTimeMillis;
     const state = store.get();
     patch({ now });
-    if (state.ownerId && now - state.lastSeen > 30_000) {
+    if (
+      state.ownerId !== null &&
+      state.ownerId !== "" &&
+      now - state.lastSeen > 30_000
+    ) {
       patch({ ownerId: null, sessionId: null, phase: "disconnected" });
       record("Sender heartbeat expired");
     }
@@ -292,7 +301,7 @@ export function createReceiver(layer: Layer.Layer<ReceiverPlatform>) {
     queryClient,
     dispatch: (event: ReceiverEvent) => runtime.runPromise(handle(event)),
     start: () => {
-      if (fiber || disposal) return;
+      if (fiber !== undefined || disposal !== undefined) return;
       const events = Stream.callback<ReceiverEvent, never, ReceiverPlatform>(
         (queue) =>
           Effect.gen(function* () {
@@ -350,7 +359,8 @@ export function createReceiver(layer: Layer.Layer<ReceiverPlatform>) {
     },
     dispose: () => {
       disposal ??= (async () => {
-        if (fiber) await runtime.runPromise(Fiber.interrupt(fiber));
+        if (fiber !== undefined)
+          await runtime.runPromise(Fiber.interrupt(fiber));
         await runtime.dispose();
         queryClient.clear();
       })();

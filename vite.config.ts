@@ -1,5 +1,3 @@
-import path from "node:path";
-
 import tailwind from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vite";
@@ -9,7 +7,7 @@ export default defineConfig({
   plugins: [react(), tailwind()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": `${import.meta.dirname}/src`,
     },
   },
 });

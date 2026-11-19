@@ -23,7 +23,7 @@ import.meta.hot?.dispose(() => {
 });
 
 const root = document.querySelector("#root");
-if (!root) throw new Error("The receiver root element is missing.");
+if (root === null) throw new Error("The receiver root element is missing.");
 createRoot(root).render(
   <React.StrictMode>
     <QueryClientProvider client={receiver.queryClient}>

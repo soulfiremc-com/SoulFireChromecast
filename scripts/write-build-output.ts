@@ -18,7 +18,8 @@ const context = { isPreview: false, mode: "production" };
 const result = await resolveAndParseConfig(config, context);
 if (!result.success) throw result.error;
 const { worker, containers: _containers, ...settings } = result.data;
-if (!worker) throw new Error("cloudflare.config.ts must define a Worker");
+if (worker === undefined)
+  throw new Error("cloudflare.config.ts must define a Worker");
 
 await cleanBuildOutputDir(root);
 await writeRootConfig({ root, settings, buildContext: context });

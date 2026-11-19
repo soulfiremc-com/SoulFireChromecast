@@ -71,14 +71,15 @@ function Shell() {
     void navigate({ to: "/diagnostics" });
   });
   const latest = data?.snapshots.at(-1);
-  const stale = latest && state.now - latest.timestamp > STALE_AFTER_MS;
+  const stale =
+    latest !== undefined && state.now - latest.timestamp > STALE_AFTER_MS;
   const notice =
     state.error ??
     (state.phase === "disconnected"
       ? "The desktop client disconnected. Use Reconnect in SoulFire to resume this display."
       : stale
         ? "Metrics stopped updating. Check the SoulFire server connection in the desktop client."
-        : !latest
+        : latest === undefined
           ? "Choose an instance and connect to this display from SoulFire’s Cast page."
           : null);
   return (
@@ -100,7 +101,7 @@ function Shell() {
             {state.phase === "connected"
               ? stale
                 ? "Data delayed"
-                : latest
+                : latest !== undefined
                   ? "Connected"
                   : "Waiting for metrics"
               : state.phase === "starting"
@@ -112,7 +113,7 @@ function Shell() {
                     : "Disconnected"}
           </span>
           <span>
-            {latest
+            {latest !== undefined
               ? `Updated ${new Date(latest.timestamp).toLocaleTimeString()}`
               : "No metrics received"}
           </span>
@@ -128,7 +129,7 @@ function Shell() {
       {notice && (
         <Alert>
           <AlertTitle>
-            {state.error
+            {state.error !== null && state.error !== ""
               ? "Connection error"
               : stale
                 ? "Data delayed"
@@ -161,33 +162,41 @@ function Dashboard() {
     {
       id: "bots",
       label: "Bots online",
-      value: latest ? `${latest.botsOnline} / ${latest.botsTotal}` : "…",
+      value:
+        latest !== undefined
+          ? `${latest.botsOnline} / ${latest.botsTotal}`
+          : "…",
     },
     {
       id: "packets",
       label: "Packets / second",
-      value: latest
-        ? Math.round(
-            latest.packetsSentPerSecond + latest.packetsReceivedPerSecond,
-          ).toLocaleString()
-        : "…",
+      value:
+        latest !== undefined
+          ? Math.round(
+              latest.packetsSentPerSecond + latest.packetsReceivedPerSecond,
+            ).toLocaleString()
+          : "…",
     },
     {
       id: "bandwidth",
       label: "Traffic",
-      value: latest
-        ? `${((latest.bytesSentPerSecond + latest.bytesReceivedPerSecond) / 1024).toFixed(1)} KiB/s`
-        : "…",
+      value:
+        latest !== undefined
+          ? `${((latest.bytesSentPerSecond + latest.bytesReceivedPerSecond) / 1024).toFixed(1)} KiB/s`
+          : "…",
     },
     {
       id: "health",
       label: "Average health",
-      value: latest ? `${latest.avgHealth.toFixed(1)} / 20` : "…",
+      value: latest !== undefined ? `${latest.avgHealth.toFixed(1)} / 20` : "…",
     },
     {
       id: "tick",
       label: "Average tick",
-      value: latest ? `${latest.avgTickDurationMs.toFixed(1)} ms` : "…",
+      value:
+        latest !== undefined
+          ? `${latest.avgTickDurationMs.toFixed(1)} ms`
+          : "…",
     },
   ];
   const titles = {
@@ -212,7 +221,7 @@ function Dashboard() {
         {settings.charts.map((id) => (
           <section className="chart-panel" key={id}>
             <h2>{titles[id]}</h2>
-            {!data || !latest ? (
+            {data === undefined || latest === undefined ? (
               <p className="chart-placeholder">Waiting for metrics</p>
             ) : id === "dimensions" ? (
               <DimensionChart data={data.distributions.dimensionCounts} />
@@ -233,20 +242,21 @@ function Dashboard() {
 function Details() {
   const { data } = useMetrics();
   const latest = data?.snapshots.at(-1);
-  const values = latest
-    ? ([
-        ["Bots online", latest.botsOnline],
-        ["Total bots", latest.botsTotal],
-        ["Average health", latest.avgHealth],
-        ["Average food", latest.avgFoodLevel],
-        ["Loaded chunks", latest.totalLoadedChunks],
-        ["Tracked entities", latest.totalTrackedEntities],
-        ["Connections / sample", latest.connections],
-        ["Disconnections / sample", latest.disconnections],
-        ["Average tick (ms)", latest.avgTickDurationMs],
-        ["Maximum tick (ms)", latest.maxTickDurationMs],
-      ] as const)
-    : [];
+  const values =
+    latest !== undefined
+      ? ([
+          ["Bots online", latest.botsOnline],
+          ["Total bots", latest.botsTotal],
+          ["Average health", latest.avgHealth],
+          ["Average food", latest.avgFoodLevel],
+          ["Loaded chunks", latest.totalLoadedChunks],
+          ["Tracked entities", latest.totalTrackedEntities],
+          ["Connections / sample", latest.connections],
+          ["Disconnections / sample", latest.disconnections],
+          ["Average tick (ms)", latest.avgTickDurationMs],
+          ["Maximum tick (ms)", latest.maxTickDurationMs],
+        ] as const)
+      : [];
   return (
     <section>
       <h2>Current metrics</h2>
@@ -258,7 +268,7 @@ function Details() {
           </div>
         ))}
       </dl>
-      {!latest && <p>Waiting for metrics</p>}
+      {latest === undefined && <p>Waiting for metrics</p>}
     </section>
   );
 }
