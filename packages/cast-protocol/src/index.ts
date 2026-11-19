@@ -130,7 +130,7 @@ export const CastDevice = Schema.Struct({
   address: Schema.String,
   port: Schema.Int.check(
     Schema.isGreaterThanOrEqualTo(1),
-    Schema.isLessThanOrEqualTo(65535),
+    Schema.isLessThanOrEqualTo(65_535),
   ),
 });
 export type CastDevice = typeof CastDevice.Type;
